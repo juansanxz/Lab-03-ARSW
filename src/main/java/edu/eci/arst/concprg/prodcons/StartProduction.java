@@ -19,10 +19,9 @@ public class StartProduction {
     
     
     public static void main(String[] args) {
-        
-        Queue<Integer> queue=new LinkedBlockingQueue<>();
-        
-        
+
+        Queue<Integer> queue=new LinkedBlockingQueue<>(3);
+
         new Producer(queue,Long.MAX_VALUE).start();
         
         //let the producer create products for 5 seconds (stock).
@@ -31,8 +30,7 @@ public class StartProduction {
         } catch (InterruptedException ex) {
             Logger.getLogger(StartProduction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         new Consumer(queue).start();
     }
     
