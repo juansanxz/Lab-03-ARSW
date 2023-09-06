@@ -90,16 +90,17 @@ public class ControlFrame extends JFrame {
                 /*
 				 * COMPLETAR
                  */
-                for (Immortal im : immortals) {
-                    im.setStop(true);
-                }
-                int sum = 0;
-                for (Immortal im : immortals) {
-                    sum += im.getHealth();
-                }
+                if (immortals != null) {
+                    for (Immortal im : immortals) {
+                        im.setStop(true);
+                    }
+                    int sum = 0;
+                    for (Immortal im : immortals) {
+                        sum += im.getHealth();
+                    }
 
-                statisticsLabel.setText("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
-
+                    statisticsLabel.setText("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
+                }
             }
         });
         toolBar.add(btnPauseAndCheck);
@@ -108,11 +109,13 @@ public class ControlFrame extends JFrame {
 
         btnResume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                for (Immortal im : immortals) {
-                    im.setStop(false);
-                }
-                synchronized (immortals.get(0).getUpdateCallback()) {
-                    immortals.get(0).getUpdateCallback().notifyAll();
+                if (immortals != null && !immortals.isEmpty()) {
+                    for (Immortal im : immortals) {
+                        im.setStop(false);
+                    }
+                    synchronized (immortals.get(0).getUpdateCallback()) {
+                        immortals.get(0).getUpdateCallback().notifyAll();
+                    }
                 }
             }
         });
@@ -128,6 +131,19 @@ public class ControlFrame extends JFrame {
         numOfImmortals.setColumns(10);
 
         JButton btnStop = new JButton("STOP");
+
+        btnStop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                for (Immortal im : immortals) {
+                    im.setDead(true);
+                }
+                immortals.clear();
+                numOfImmortals.setText("");
+                btnStart.setEnabled(true);
+            }
+        });
+
+
         btnStop.setForeground(Color.RED);
         toolBar.add(btnStop);
 
@@ -147,6 +163,7 @@ public class ControlFrame extends JFrame {
     public List<Immortal> setupInmortals() {
 
         ImmortalUpdateReportCallback ucb=new TextAreaUpdateReportCallback(output,scrollPane);
+        ucb.cleanTextArea();
         
         try {
             int ni = Integer.parseInt(numOfImmortals.getText());
@@ -190,6 +207,10 @@ class TextAreaUpdateReportCallback implements ImmortalUpdateReportCallback{
         }
         );
 
+    }
+
+    public void cleanTextArea () {
+        ta.setText("");
     }
     
 }

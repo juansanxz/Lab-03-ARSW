@@ -100,14 +100,17 @@ Sincronización y Dead-Locks.
 	![img_12.png](img/img_12.png)
 	Aquí el invariante no se está cumpliendo, viendo un error en la solución.
 	![img_13.png](img/img_13.png)
-	Con 10000 jugadores la suma debe dar 1000000:
-	Son muchos hilos, el computador no alcanza a manejar tantos.
+	Con 10000 jugadores la suma debe dar 1000000:  
+	El computador no alcanzó a manejar tantos hilos.
 
-10. Un elemento molesto para la simulación es que en cierto punto de la misma hay pocos 'inmortales' vivos realizando peleas fallidas con 'inmortales' ya muertos. Es necesario ir suprimiendo los inmortales muertos de la simulación a medida que van muriendo. Para esto:
-	* Analizando el esquema de funcionamiento de la simulación, esto podría crear una condición de carrera? Implemente la funcionalidad, ejecute la simulación y observe qué problema se presenta cuando hay muchos 'inmortales' en la misma. Escriba sus conclusiones al respecto en el archivo RESPUESTAS.txt.
-	* Corrija el problema anterior __SIN hacer uso de sincronización__, pues volver secuencial el acceso a la lista compartida de inmortales haría extremadamente lenta la simulación.
+10. __Un elemento molesto para la simulación es que en cierto punto de la misma hay pocos 'inmortales' vivos realizando peleas fallidas con 'inmortales' ya muertos. Es necesario ir suprimiendo los inmortales muertos de la simulación a medida que van muriendo. Para esto:__
+	* __Analizando el esquema de funcionamiento de la simulación, esto podría crear una condición de carrera? Implemente la funcionalidad, ejecute la simulación y observe qué problema se presenta cuando hay muchos 'inmortales' en la misma. Escriba sus conclusiones al respecto en el archivo RESPUESTAS.txt.__  
+    	La condición de carrera que evidenciamos es que en alguno que otro caso, muy aleatorio, con una gran cantidad de luchadores, se presenta un desfase en la invariante de más o menos 10, esto debido a que inmortales muertos seguían atacando.
+	* __Corrija el problema anterior __SIN hacer uso de sincronización__, pues volver secuencial el acceso a la lista compartida de inmortales haría extremadamente lenta la simulación.__  
+        Para solucionar el problema de los inmortales muertos, una vez el inmortal tenga una vida de 0 es eliminado del arreglo y de igual forma al momento de pelear verifica si el jugador que está atacando ya está muerto para evitar que logre pelear.
 
-11. Para finalizar, implemente la opción STOP.
+11. __Para finalizar, implemente la opción STOP.__ 
+	La implementación se encuentra en el código.
 
 <!--
 ### Criterios de evaluación
