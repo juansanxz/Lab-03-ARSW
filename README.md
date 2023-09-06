@@ -109,7 +109,7 @@ Sincronización y Dead-Locks.
 	* __Corrija el problema anterior __SIN hacer uso de sincronización__, pues volver secuencial el acceso a la lista compartida de inmortales haría extremadamente lenta la simulación.__  
         Para solucionar el problema de los inmortales muertos, una vez el inmortal tenga una vida de 0 es eliminado del arreglo y de igual forma al momento de pelear verifica si el jugador que está atacando ya está muerto para evitar que logre pelear.
 
-11. __Para finalizar, implemente la opción STOP.__ 
+11. __Para finalizar, implemente la opción STOP.__  
 	La implementación se encuentra en el código.
 
 <!--
