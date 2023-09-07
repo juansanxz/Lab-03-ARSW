@@ -8,6 +8,8 @@
 ##### Parte I – Antes de terminar la clase.
 
 __Control de hilos con wait/notify. Productor/consumidor.__
+__Santiago Arévalo Rojas__
+__Juan Felipe Sánchez Pérez__
 
 1. __Revise el funcionamiento del programa y ejecútelo. Mientras esto ocurren, ejecute jVisualVM y revise el consumo de CPU del proceso correspondiente. A qué se debe este consumo?, cual es la clase responsable?__  
 	![](img/img1.png)
